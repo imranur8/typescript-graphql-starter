@@ -21,6 +21,7 @@ To build and run this app locally you will need a few things:
 - Install [VS Code](https://code.visualstudio.com/)
 - Install [typeORM](https://typeorm.io/#/) supported database
 - [TypeGraphQL](https://typegraphql.com/)
+- [Apollo server express](https://www.npmjs.com/package/apollo-server-express)
 
 # Getting started
 - Clone the repository
