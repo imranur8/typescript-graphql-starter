@@ -1,0 +1,6 @@
+{
+  "name": "TypeScript GraphQL Starter",
+  "version": "1.0.0",
+  "description": "Typescript + Express + TypeORM + TypeGraphQL + Apollo Server",
+  "url": "http://locahost:3400/"
+}
