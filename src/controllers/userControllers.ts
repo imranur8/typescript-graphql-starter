@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User from "../entity/User";
+import User, { RoleTypes } from "../entities/User";
 import { getManager } from "typeorm";
 import logger from "../utils/logger";
 import { IRequest } from "app-types";
@@ -49,8 +49,12 @@ import jwt from "jsonwebtoken";
 export const createUser = async (request: Request, response: Response) => {
   try {
     const userRepository = getManager().getRepository(User);
+    const { role } = request.body;
+    if (!Object.values(RoleTypes).includes(role)) {
+      throw new Error("Role not found");
+    }
     const newUser = userRepository.create(request.body);
-    const result = await userRepository.save(newUser);
+    const result = await User.save(newUser);
     response.json(result);
   } catch (error) {
     logger.error(`${error.message}, stack trace - ${error.stack}`);

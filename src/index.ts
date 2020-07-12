@@ -9,7 +9,7 @@ import appRoutes from "./routes";
 import logger from "./utils/logger";
 import { ApolloServer } from 'apollo-server-express';
 import getSchema from "./resolvers";
-import { IRequest } from "app-types";
+import { IExpressContext } from "app-types";
 import { isJwtAuthenticated } from "./middlewares/auth";
 
 // create connection with database
@@ -30,16 +30,14 @@ createConnection().then(async connection => {
   // REST API end points
   app.use("/api", appRoutes);
 
-  app.post('/graphql', [isJwtAuthenticated], (request: IRequest, response: Response, next: NextFunction) => {
-    next();
-  });
+  app.use(isJwtAuthenticated);
 
   // Build graphqlSchema server
   const apolloServer = new ApolloServer({
     schema: await getSchema(),
-    context: (integrationContext) => ({
-      authScope: integrationContext.req.headers.authorization
-    }),
+    context: (expressContext: IExpressContext) => {
+      return { ...expressContext.req.user }
+    },
     introspection: true,
   });
 
