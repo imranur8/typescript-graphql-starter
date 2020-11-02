@@ -5,9 +5,9 @@
   "username": "username",
   "password": "password",
   "database": "accounting",
-  "synchronize": true,
+  "synchronize": false,
   "entities": [
-    "dist/entity/*.js"
+    "dist/entities/*.js"
   ],
   "subscribers": [
     "src/subscriber/*.js"
@@ -16,7 +16,7 @@
     "dist/migration/*.js"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
+    "entitiesDir": "src/entities",
     "migrationsDir": "src/migration",
     "subscribersDir": "src/subscriber"
   }
